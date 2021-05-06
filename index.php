@@ -1,141 +1,163 @@
 <?php
-
-if($_SERVER["REQUEST_METHOD"]=="POST"){
-    $ime_proizvoda = $_POST['ime_proizvoda'];
-    if (empty($ime_proizvoda)){
-        echo "Nema podataka za ime";
-    } else {
-       echo $ime_proizvoda;
-    }
-}
-if($_SERVER['REQUEST_METHOD'] == "POST"){
-    $cijena = $_POST['cijena'];
-    if(empty($cijena)){
-        echo "Nema podataka za cijenu";
-    } else {
-      echo  $cijena;
-    }
-
-}
-
-
-$servername = "localhost";
-$username = "roki";
-$password = "roki";
-$roki = "roki";
-
-$conn = mysqli_connect($servername, $username, $password, $roki);
-
-if (!$conn) {
-    die ("Connecetion failed: " . mysqli_connect_error());
-}
-
-//$sql = "INSERT INTO products (ime_proizvoda, cijena)
-// VALUES ('{$ime_proizvoda}', '{$cijena}')";
-//
-//if(mysqli_query($conn, $sql)){
-//    echo "uspjesno dodat proizvod u bazu";
-//} else {
-//    echo "Error" . $sql. "</br> ". mysqli_error($conn);
-//}
-
-
-//
-//$stat = $conn ->prepare("INSERT INTO products(ime_proizvoda, cijena)
-//VALUES ('{$ime_proizvoda}' , '{$cijena}')");
-//$stat ->bind_param("sss", $ime_proizvoda, $cijena);
-
-$select = "SELECT  id, ime_proizvoda, cijena FROM products";
-$rezultat = $conn ->query($select);
-$proizvodi =[];
-
-if($rezultat->num_rows > 0){
-    while ($row = $rezultat->fetch_assoc()){
-        $proizvodi []= $row;
-    }
-
-}
+ini_set('display_errors', 'On');
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
 
 ?>
-
 <html>
  <head>
      <style>
-         a.edit {
-             background-color: blue;
+         .container {
+             width: 900px;
+             margin: auto;
          }
 
-         a.create {
-             background-color: green;
+         .row {}
+
+         .row {
+             display: flex;
+             flex-wrap: wrap;
          }
 
-         a {
-             padding: 3px 8px;
-             border-radius: 7px;
+         .col {}
+
+         .col {
+             width: 25%;
+         }
+
+         .product h5 {text-align: center;}
+
+         .product img {
+             width: 80%;
+             margin: auto;
+             display: block;
+         }
+
+         .product .specs a {
+             background: red;
              color: white;
              text-decoration: none;
+             padding: 2px 10px;
+             border-radius: 10px;
+             transition: background .3s, color .3s;
+             border: solid thin red;
          }
 
-         a.delete {
-             background-color: red;
+         .specs {
+             margin-top: 7px;
+             justify-content: space-around;
+             display: flex;
          }
 
-         td a+a {
-             margin-left: 4px;
+         .product:hover .specs a {
+             background: orange;
+             color cursor: progress;
+         }
+
+         .product .specs:hover a {
+             background: yellow;
+             color: orange;
+         }
+
+         .product .specs a:hover {
+             background: white;
+             color: red;
          }
 
      </style>
  <title>
-     Lista proizvoda
+     Roki fashion
  </title>
  </head>
 <body>
 
-<h1>Lista proizvoda</h1>
-<a href="/create.php" class="create">
-    Kreiraj novi proizvod
-</a>
-<hr>
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Ime</th>
-        <th>Cijena</th>
-        <th>Opcije</th>
-    </tr>
-    </thead>
-    <tbody>
-    <?php
+<div class="container">
+    <div class="row">
+        <div class="col-h">
+            <h1>Roki </h1>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="product">
+                <h5><a href="#">Ime proizvoda</a></h5>
+                <img src="https://placeimg.com/200/300/animals?1" alt="Zivotinja">
+                <div class="specs">
+                    <span>40.00 KM</span>
+                    <a href="/addtocard.php?id=<?php echo $proizvod['id'] ?>" >
+                        KUPI
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="product">
+                <h5><a href="#">Ime proizvoda</a></h5>
+                <img src="https://placeimg.com/200/300/animals?2" alt="Zivotinja">
+                <div class="specs">
+                    <span>40.00 KM</span>
+                    <a href="/addtocard.php?id=<?php echo $proizvod['id'] ?>" >
+                        KUPI
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="product">
+                <h5><a href="#">Ime proizvoda</a></h5>
+                <img src="https://placeimg.com/200/300/animals?3" alt="Zivotinja">
+                <div class="specs">
+                    <span>40.00 KM</span>
+                    <a href="/addtocard.php?id=<?php echo $proizvod['id'] ?>" >
+                        KUPI
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="product">
+                <h5><a href="#">Ime proizvoda</a></h5>
+                <img src="https://placeimg.com/200/300/animals?4" alt="Zivotinja">
+                <div class="specs">
+                    <span>40.00 KM</span>
+                    <a href="/addtocard.php?id=<?php echo $proizvod['id'] ?>" >
+                    KUPI
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="product">
+                <h5><a href="#">Ime proizvoda</a></h5>
+                <img src="https://placeimg.com/200/300/animals?5" alt="Zivotinja">
+                <div class="specs">
+                    <span>40.00 KM</span>
+                    <a href="/addtocard.php?id=<?php echo $proizvod['id']; ?>">
+                        KUPI
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="product">
+                <h5><a href="#">Ime proizvoda</a></h5>
+                <img src="https://placeimg.com/200/300/animals?6" alt="Zivotinja">
+                <div class="specs">
+                    <span>40.00 KM</span>
+                    <a href="/admin/update.php?id=<?php echo $proizvod['id'] ?>" class="delete">
 
-    foreach ($proizvodi as $proizvod){
 
-        ?>
-        <tr>
-            <td> <?php echo $proizvod['id']; ?> </td>
-            <td><?php echo $proizvod['ime_proizvoda'];  ?> </td>
-            <td> <?php echo $proizvod['cijena']; ?>  </td>
-            <td>
-                <a href="/edit.php?id=<?php echo $proizvod['id']; ?> " class="edit">
-                    Azuriraj
-                </a>
-                <a href="/delete.php?id=<?php echo $proizvod['id'] ?>" class="delete">
-                    Obrisi
-                </a>
-            </td>
-        </tr>
-    <?php
-    }
+                        +66666
 
-
-    ?>
-
-
-    </tbody>
-</table>
+                    <a href="/addtocard.php?id=<?php echo $proizvod['id'] ?>" >
+                        KUPI
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 
 </html>
-
-
-

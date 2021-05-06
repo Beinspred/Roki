@@ -1,32 +1,25 @@
-
-
-
 <?php
+require_once('session.php');
+
 if($_SERVER['REQUEST_METHOD']=="GET"){
         $id= $_GET['id'];
         if(empty($id)){
             error_log("Nema id za edit");
         }
 }
+//var_dump($_GET);
+//die();
 
-$servername = "localhost";
-$username = "roki";
-$password = "roki";
-$roki = "roki";
+require_once('../connections_database.php');
 
-$conn = mysqli_connect($servername, $username, $password, $roki);
 
-if (!$conn) {
-    die ("Connecetion failed: " . mysqli_connect_error());
-}
-
-$select = "SELECT id,ime_proizvoda, cijena FROM products WHERE id='{$id}'";
+$select = "SELECT id,ime_proizvoda, cijena, opis_proizvoda, slika FROM products WHERE id='{$id}'";
 $rezultat= $conn->query($select);
 $proizvod = [];
 
 if($rezultat ->num_rows > 0){
     while ($row = $rezultat->fetch_assoc()){
-        $proizvod [] = $row;
+        $proizvod = $row;
     }
 }
 //var_dump($proizvod);
@@ -72,9 +65,13 @@ Edit proizvoda
 <body>
 <h1>Edit proizvod</h1>
 
-<form action="/update.php?id=<?php echo $proizvod[0]['id']; ?>" method="post">
-    <input type="text" name="ime_proizvoda" placeholder="" value="<?php echo $proizvod[0]['ime_proizvoda']; ?>">
-    <input type="number" name="cijena" placeholder="" value="<?php echo $proizvod[0]['cijena']; ?>">
+<form action="/admin/update.php?id=<?php echo $proizvod['id']; ?>" method="post">
+    <input type="text" name="ime_proizvoda" placeholder="Ime proizvoda" value="<?php echo $proizvod['ime_proizvoda']; ?>">
+    <input type="number" name="cijena" placeholder="Cijena" value="<?php echo $proizvod['cijena']; ?>">
+    <input type="text" name="opis_proizvoda" placeholder="Opis proizvoda" value="<?php echo $proizvod['opis_proizvoda']; ?>">
+    <input type="text" name="slika" placeholder="Slika proizvoda" value="<?php echo $proizvod['slika']; ?>">
+
+
     <button type="submit">Edit</button>
 </form>
 

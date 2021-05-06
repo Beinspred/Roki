@@ -1,12 +1,11 @@
 <?php
-
+require_once('session.php');
 
 $id= $_GET['id'];
 if(empty($id)){
     die("Nema id za edit");
 
 }
-
 
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
     header('Location: /edit.php?='. $id);
@@ -24,32 +23,34 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         die ("Nema podataka za cijenu");
     }
 }
-
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $opis_proizvoda = $_POST['opis_proizvoda'];
+    if (empty($opis_proizvoda)) {
+        die ("Nema podataka za opis proizvoda");
+    }
+}
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $slika = $_POST['slika'];
+    if (empty($slika)) {
+        die ("Nema podataka za sliku");
+    }
+}
 
 
 /*DATABASE*/
-$servername = "localhost";
-$username = "roki";
-$password = "roki";
-$roki = "roki";
+require_once('../connections_database.php');
 
-$conn = mysqli_connect($servername, $username, $password, $roki);
-
-if (!$conn) {
-    die ("Connecetion failed: " . mysqli_connect_error());
-}
-
-$sql = "UPDATE products SET ime_proizvoda='{$ime_proizvoda}', cijena='{$cijena}' WHERE id='{$id}'";
+$sql = "UPDATE products SET ime_proizvoda='{$ime_proizvoda}', cijena='{$cijena}', opis_proizvoda='{$opis_proizvoda}', slika='{$slika}' WHERE id='{$id}'";
 
 
 //var_dump($sql);
 //die();
 if (mysqli_query($conn, $sql)) {
     error_log("Uspjesno dodat proizvod u bazu");
-    header('Location: /');
+    header('Location: /admin/index.php');
 } else {
     error_log("Error" . $sql . "</br> " . mysqli_error($conn));
-    header('Location: /edit.php?='. $id);
+    header('Location: /admin/edit.php?='. $id);
     die;
 }
 

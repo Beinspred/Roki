@@ -1,14 +1,7 @@
 <?php
-$servername = "localhost";
-$username = "roki";
-$password = "roki";
-$roki = "roki";
+require_once('session.php');
 
-$conn = mysqli_connect($servername, $username, $password, $roki);
-
-if (!$conn) {
-    die ("Connecetion failed: " . mysqli_connect_error());
-}
+require_once('connections_database.php');
 
 $sql = "SELECT * FROM products";
 $result = $conn->query($sql);

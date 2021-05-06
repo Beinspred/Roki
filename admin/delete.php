@@ -1,4 +1,6 @@
 <?php
+require_once('session.php');
+
 if($_SERVER['REQUEST_METHOD']== "GET"){
     $id= $_GET['id'];
       if(empty($id)){
@@ -7,22 +9,15 @@ if($_SERVER['REQUEST_METHOD']== "GET"){
 }
 
 /*DATABASE*/
-$servername = "localhost";
-$username = "roki";
-$password = "roki";
-$roki = "roki";
+require_once('../connections_database.php');
 
-$conn = mysqli_connect($servername, $username, $password, $roki);
-if(!$conn){
-    die("Connecetion failed: " .mysqli_connect_error());
-}
 
 $sql = "DELETE FROM products WHERE id='{$id}'";
 
 if($conn->query($sql)== TRUE){
     echo "Proizvod uspjesno obrisan";
-    header('Location: /');
+    header('Location: /admin/index.php');
 } else {
     die("Error deleting record" . $conn->query());
-    header('Location: /');
+    header('Location: /admin/index.php');
 }
