@@ -3,6 +3,19 @@ ini_set('display_errors', 'On');
 //ini_set('display_startup_errors', 1);
 //error_reporting(E_ALL);
 
+require_once('./connections_database.php');
+
+$select = "SELECT  id, ime_proizvoda, cijena, opis_proizvoda, slika FROM products";
+$rezultat = $conn ->query($select);
+$proizvodi =[];
+
+if($rezultat->num_rows > 0){
+    while ($row = $rezultat->fetch_assoc()){
+        $proizvodi []= $row;
+    }
+
+}
+
 ?>
 <html>
  <head>
@@ -71,6 +84,8 @@ ini_set('display_errors', 'On');
  </head>
 <body>
 
+
+
 <div class="container">
     <div class="row">
         <div class="col-h">
@@ -79,85 +94,34 @@ ini_set('display_errors', 'On');
         </div>
     </div>
     <div class="row">
-        <div class="col">
-            <div class="product">
-                <h5><a href="#">Ime proizvoda</a></h5>
-                <img src="https://placeimg.com/200/300/animals?1" alt="Zivotinja">
-                <div class="specs">
-                    <span>40.00 KM</span>
-                    <a href="/addtocard.php?id=<?php echo $proizvod['id'] ?>" >
-                        KUPI
-                    </a>
+        <?php
+
+        foreach ($proizvodi as $proizvod){
+
+        ?>
+            <div class="col">
+                <div class="product">
+                    <h5><a href="/product_page.php?id=<?php echo $proizvod['id']; ?>"><?php echo $proizvod['ime_proizvoda'];  ?> </a></h5>
+                    <?php if (!empty($proizvod['slika'])) : ?>
+                        <img src="<?php echo $proizvod['slika']; ?>" alt="<?php echo $proizvod['ime_proizvoda']; ?> ">
+                    <?php endif; ?>
+                    <?php echo $proizvod['opis_proizvoda']; ?>
+                    <div class="specs">
+                        <span>40.00 KM</span>
+                        <a href="/addtocard.php?id=<?php echo $proizvod['id'] ?>">
+                            KUPI
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col">
-            <div class="product">
-                <h5><a href="#">Ime proizvoda</a></h5>
-                <img src="https://placeimg.com/200/300/animals?2" alt="Zivotinja">
-                <div class="specs">
-                    <span>40.00 KM</span>
-                    <a href="/addtocard.php?id=<?php echo $proizvod['id'] ?>" >
-                        KUPI
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="product">
-                <h5><a href="#">Ime proizvoda</a></h5>
-                <img src="https://placeimg.com/200/300/animals?3" alt="Zivotinja">
-                <div class="specs">
-                    <span>40.00 KM</span>
-                    <a href="/addtocard.php?id=<?php echo $proizvod['id'] ?>" >
-                        KUPI
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="product">
-                <h5><a href="#">Ime proizvoda</a></h5>
-                <img src="https://placeimg.com/200/300/animals?4" alt="Zivotinja">
-                <div class="specs">
-                    <span>40.00 KM</span>
-                    <a href="/addtocard.php?id=<?php echo $proizvod['id'] ?>" >
-                    KUPI
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="product">
-                <h5><a href="#">Ime proizvoda</a></h5>
-                <img src="https://placeimg.com/200/300/animals?5" alt="Zivotinja">
-                <div class="specs">
-                    <span>40.00 KM</span>
-                    <a href="/addtocard.php?id=<?php echo $proizvod['id']; ?>">
-                        KUPI
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="product">
-                <h5><a href="#">Ime proizvoda</a></h5>
-                <img src="https://placeimg.com/200/300/animals?6" alt="Zivotinja">
-                <div class="specs">
-                    <span>40.00 KM</span>
-                    <a href="/admin/update.php?id=<?php echo $proizvod['id'] ?>" class="delete">
+            <?php
+        }
 
 
-                        +66666
-
-                    <a href="/addtocard.php?id=<?php echo $proizvod['id'] ?>" >
-                        KUPI
-                    </a>
-                </div>
-            </div>
-        </div>
+        ?>
     </div>
 </div>
+
 </body>
 
 </html>

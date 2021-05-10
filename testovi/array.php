@@ -10,3 +10,9 @@ $niz3 = [
     ['test1'=>258, 'test2'=>564]
 ];
 var_dump($niz3[1]['test2']);
+
+$korpa = [];
+$_SESSION['korpa'] = ['id'=>$id, 'kolicina'=>1];
+$_SESSION['korpa'] =[
+    $id=>1
+];
