@@ -2,10 +2,8 @@
 session_start();
 
 
-var_dump($_SESSION);
-//die;
-$product_ids= $_SESSION['korpa'];
-print_r(array_keys($product_ids));
+//var_dump($_SESSION);
+$product_ids = array_keys($_SESSION['korpa']);
 $product_ids_string= implode(",",$product_ids);
 
 //$array = array('lastname', 'email', 'phone');
@@ -16,28 +14,27 @@ $select= "SELECT id,ime_proizvoda,cijena FROM products WHERE id IN ({$product_id
 
 $rezultat = $conn->query($select);
 $proizvodi=[];
+//$product_kolcina = array_keys($_SESSION['korpa'][][]);
+
+$total = 0;
 
 if($rezultat->num_rows>0){
+
     while ($row = $rezultat->fetch_assoc())
     {
+        $id = $row['id'];
+//        var_dump($row['id']);
+        $row['kolicina'] = $_SESSION['korpa'][$id];
+        $row['ukupno'] = $row['kolicina'] * $row['cijena'];
+//        var_dump($row);
         $proizvodi [] = $row;
+        $total += $row['ukupno'];
+//        var_dump($total);
+
     }
 
 }
-var_dump($proizvodi);
-
-//SELECT
-//    column1,column2,...
-//FROM
-//    table_name
-//WHERE
-//	(expr|column_1) IN ('value1','value2',...);
-
-
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -175,6 +172,7 @@ var_dump($proizvodi);
         </div>
     </div>
     <div class="row">
+
         <div class="col-100">
             <table class="table">
                 <thead>
@@ -186,32 +184,34 @@ var_dump($proizvodi);
                 </tr>
                 </thead>
                 <tbody>
+                <?php
+
+                foreach ($proizvodi as $proizvod){
+
+                ?>
+
                 <tr>
-                    <td>Proizvod 1</td>
-                    <td>2.25 KM</td>
-                    <td>4</td>
-                    <td>9.00 KM</td>
+                    <td><?php echo $proizvod['ime_proizvoda'];  ?></td>
+                    <td><?php echo $proizvod['cijena'];?> KM</td>
+                    <td><?php echo $proizvod['kolicina'];?></td>
+                    <td><?php echo $proizvod['ukupno'];?> KM</td>
                 </tr>
-                <tr>
-                    <td>Proizvod 2</td>
-                    <td>3.00 KM</td>
-                    <td>1</td>
-                    <td>3.00 KM</td>
-                </tr>
-                <tr>
-                    <td>Proizvod 3</td>
-                    <td>3.50 KM</td>
-                    <td>5</td>
-                    <td>17.50 KM</td>
-                </tr>
+                    <?php
+                }
+
+
+                ?>
                 </tbody>
                 <tfoot>
                 <tr>
                     <th colspan="3">Ukupno</th>
-                    <th>29.50 KM</th>
+                    <th><?php echo $total;?> KM</th>
                 </tr>
                 </tfoot>
             </table>
+            <form action="./orders.php" method="post">
+                <button>Orders</button>
+            </form>
         </div>
     </div>
 </div>

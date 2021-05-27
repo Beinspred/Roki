@@ -107,7 +107,7 @@ if($rezultat->num_rows > 0){
                     <?php endif; ?>
                     <?php echo $proizvod['opis_proizvoda']; ?>
                     <div class="specs">
-                        <span>40.00 KM</span>
+                        <span> <?php echo $proizvod['id'] ?> KM</span>
                         <a href="/addtocard.php?id=<?php echo $proizvod['id'] ?>">
                             KUPI
                         </a>
