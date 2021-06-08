@@ -45,6 +45,7 @@ Kreiranje proizvoda
     <input type="text" name="ime_proizvoda" placeholder="Ime proizvoda">
     <input type="number" name="cijena" placeholder="0.00">
     <input type="text" name="opis_proizvoda" placeholder="Opis_proizvoda">
+    <input type="text" name="kolicina" placeholder="Kolicina">
     <input type="text" name="slika" placeholder="slika">
 
     <button type="submit">Kreiraj</button>

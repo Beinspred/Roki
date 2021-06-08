@@ -38,7 +38,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
 require_once('../connections_database.php');
 
-$select = "SELECT  id, ime_proizvoda, cijena, opis_proizvoda, slika FROM products";
+$select = "SELECT  id, ime_proizvoda, cijena, opis_proizvoda, kolicina, slika FROM products";
 $rezultat = $conn ->query($select);
 $proizvodi =[];
 
@@ -49,11 +49,32 @@ if($rezultat->num_rows > 0){
 
 }
 
+
 ?>
 
 <html>
  <head>
      <style>
+         table {
+             font-family: arial, sans-serif;
+             border-collapse: collapse;
+             width: 100%;
+         }
+
+         td, th {
+             border: 1px solid #dddddd;
+             text-align: left;
+             padding: 8px;
+         }
+
+         tr:nth-child(even) {
+             background-color: #;
+         }
+
+         img {
+             max-width: 100%;
+             height: auto;
+         }
          a.edit {
              background-color: blue;
          }
@@ -95,6 +116,9 @@ if($rezultat->num_rows > 0){
         <th>ID</th>
         <th>Ime</th>
         <th>Cijena</th>
+        <th>Opis proizvoda</th>
+        <th>Kolicina</th>
+        <th>slika</th>
         <th>Opcije</th>
     </tr>
     </thead>
@@ -107,7 +131,9 @@ if($rezultat->num_rows > 0){
         <tr>
             <td> <?php echo $proizvod['id']; ?> </td>
             <td><?php echo $proizvod['ime_proizvoda'];  ?> </td>
+            <td> <?php echo $proizvod['cijena']; ?>  </td>
             <td> <?php echo $proizvod['opis_proizvoda']; ?>  </td>
+            <td> <?php echo $proizvod['kolicina']; ?>  </td>
             <td><img src="<?php echo $proizvod['slika']; ?>" alt="<?php echo $proizvod['ime_proizvoda']; ?> ">  </td>
 
             <td>
@@ -117,6 +143,7 @@ if($rezultat->num_rows > 0){
                 <a href="/admin/delete.php?id=<?php echo $proizvod['id'] ?>" class="delete">
                     Obrisi
                 </a>
+
             </td>
         </tr>
     <?php

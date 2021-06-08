@@ -4,6 +4,7 @@ if($_SERVER['REQUEST_METHOD']=="GET"){
     $id=$_GET['id'];
     if(empty($id)){
         error_log("Nema id za edit");
+        header('Location: /');
     }
 }
 require_once('connections_database.php');
@@ -17,6 +18,9 @@ if($rezultat ->num_rows > 0){
         $proizvod = $row;
     }
 }
+
+$visitor_counter = "UPDATE products SET visitor_counter = visitor_counter+1 WHERE id ='{$id}'";
+ $conn->query($visitor_counter);
 
 
 ?>

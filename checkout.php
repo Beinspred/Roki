@@ -4,24 +4,23 @@ session_start();
 
 //var_dump($_SESSION);
 $product_ids = array_keys($_SESSION['korpa']);
-$product_ids_string= implode(",",$product_ids);
+$product_ids_string = implode(",", $product_ids);
 
 //$array = array('lastname', 'email', 'phone');
 //$comma_separated = implode(",", $array);
 
 require_once('./connections_database.php');
-$select= "SELECT id,ime_proizvoda,cijena FROM products WHERE id IN ({$product_ids_string})";
+$select = "SELECT id,ime_proizvoda,cijena FROM products WHERE id IN ({$product_ids_string})";
 
 $rezultat = $conn->query($select);
-$proizvodi=[];
+$proizvodi = [];
 //$product_kolcina = array_keys($_SESSION['korpa'][][]);
 
 $total = 0;
 
-if($rezultat->num_rows>0){
+if ($rezultat->num_rows > 0) {
 
-    while ($row = $rezultat->fetch_assoc())
-    {
+    while ($row = $rezultat->fetch_assoc()) {
         $id = $row['id'];
 //        var_dump($row['id']);
         $row['kolicina'] = $_SESSION['korpa'][$id];
@@ -67,7 +66,9 @@ if($rezultat->num_rows>0){
             width: 100%;
         }
 
-        .product h5 {text-align: center;}
+        .product h5 {
+            text-align: center;
+        }
 
         .product-detail h5 {
             text-align: left;
@@ -121,11 +122,12 @@ if($rezultat->num_rows>0){
             padding: 6px 11px;
             border-radius: 30px;
         }
-        .cart:hover>svg>path {
+
+        .cart:hover > svg > path {
             stroke: white;
         }
 
-        .cart>svg>path {
+        .cart > svg > path {
             transition: stroke .4s;
         }
 
@@ -139,10 +141,10 @@ if($rezultat->num_rows>0){
 
         table.table {
             width: 70%;
-            margin: auto;
+
         }
 
-        table.table td+td, table.table tfoot th+th {
+        table.table td + td, table.table tfoot th + th {
             text-align: right;
         }
 
@@ -153,6 +155,71 @@ if($rezultat->num_rows>0){
         table.table tbody tr td {
             border-bottom: solid thin black;
         }
+
+        .kupac {
+
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: white;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Add padding to containers */
+        .container {
+            padding: 16px;
+            background-color: white;
+        }
+
+        /* Full-width input fields */
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            display: inline-block;
+            border: none;
+            background: #f1f1f1;
+        }
+
+        input[type=text]:focus, input[type=password]:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+
+        /* Overwrite default styles of hr */
+        hr {
+            border: 1px solid #f1f1f1;
+            margin-bottom: 25px;
+        }
+
+        /* Set a style for the submit button */
+        .registerbtn {
+            background-color: #04AA6D;
+            color: white;
+            padding: 11px 88px;
+            margin: 7px 0;
+            border: none;
+            cursor: pointer;
+            width: 70%;
+            opacity: 16.9;
+        }
+
+        .registerbtn:hover {
+            opacity: 1;
+        }
+
+        /* Add a blue text color to links */
+        a {
+            color: dodgerblue;
+        }
+
+        /* Set a grey background color and center the text of the "sign in" section */
+        .signin {
+            background-color: #f1f1f1;
+            text-align: center;
+        }
+
     </style>
 </head>
 <body>
@@ -160,8 +227,10 @@ if($rezultat->num_rows>0){
 
 <a class="cart" href="/checkout.php">
     <svg width="50" height="50" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M8 8H19C19 8 19.941 16.2521 21.1896 27M21.1896 27C23.2225 44.4994 26.0707 68.6147 27 74.5C28.5 84 29.5 84 37 84H97.5C103.398 83.3094 105.275 80.9491 107 74.5L115.5 34C116.047 27.7841 113.437 26.9255 107 27H21.1896Z" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
-        <path d="M49 108.5C49 113.194 45.1944 117 40.5 117C35.8056 117 32 113.194 32 108.5C32 103.806 35.8056 100 40.5 100C45.1944 100 49 103.806 49 108.5ZM97 108.5C97 113.194 93.1944 117 88.5 117C83.8056 117 80 113.194 80 108.5C80 103.806 83.8056 100 88.5 100C93.1944 100 97 103.806 97 108.5Z" stroke="#000000" stroke-width="8" />
+        <path d="M8 8H19C19 8 19.941 16.2521 21.1896 27M21.1896 27C23.2225 44.4994 26.0707 68.6147 27 74.5C28.5 84 29.5 84 37 84H97.5C103.398 83.3094 105.275 80.9491 107 74.5L115.5 34C116.047 27.7841 113.437 26.9255 107 27H21.1896Z"
+              stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M49 108.5C49 113.194 45.1944 117 40.5 117C35.8056 117 32 113.194 32 108.5C32 103.806 35.8056 100 40.5 100C45.1944 100 49 103.806 49 108.5ZM97 108.5C97 113.194 93.1944 117 88.5 117C83.8056 117 80 113.194 80 108.5C80 103.806 83.8056 100 88.5 100C93.1944 100 97 103.806 97 108.5Z"
+              stroke="#000000" stroke-width="8"/>
     </svg>
 </a>
 <div class="container">
@@ -186,16 +255,16 @@ if($rezultat->num_rows>0){
                 <tbody>
                 <?php
 
-                foreach ($proizvodi as $proizvod){
+                foreach ($proizvodi as $proizvod) {
 
-                ?>
+                    ?>
 
-                <tr>
-                    <td><?php echo $proizvod['ime_proizvoda'];  ?></td>
-                    <td><?php echo $proizvod['cijena'];?> KM</td>
-                    <td><?php echo $proizvod['kolicina'];?></td>
-                    <td><?php echo $proizvod['ukupno'];?> KM</td>
-                </tr>
+                    <tr>
+                        <td><?php echo $proizvod['ime_proizvoda']; ?></td>
+                        <td><?php echo $proizvod['cijena']; ?> KM</td>
+                        <td><?php echo $proizvod['kolicina']; ?></td>
+                        <td><?php echo $proizvod['ukupno']; ?> KM</td>
+                    </tr>
                     <?php
                 }
 
@@ -205,12 +274,12 @@ if($rezultat->num_rows>0){
                 <tfoot>
                 <tr>
                     <th colspan="3">Ukupno</th>
-                    <th><?php echo $total;?> KM</th>
+                    <th><?php echo $total; ?> KM</th>
                 </tr>
                 </tfoot>
             </table>
-            <form action="./orders.php" method="post">
-                <button>Orders</button>
+            <form class="registerbtn" action="./orders.php" method="post">
+                <button type="submit" class="registerbtn">Naruci</button>
             </form>
         </div>
     </div>

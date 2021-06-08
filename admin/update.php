@@ -30,21 +30,30 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 }
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $slika = $_POST['slika'];
-    if (empty($slika)) {
-        die ("Nema podataka za sliku");
+    $kolicina = $_POST['kolicina'];
+    if (empty($kolicina)) {
+        die ("Nema podataka za kolicinu");
+    }
+}
+$slika = '';
+
+if(isset($_FILES['slika'])){
+    $slika = '/image/' . $_FILES['slika']['name'];
+    $tempname = $_FILES['slika']['tmp_name'];
+    $file_destination = __DIR__ . '/..' .$slika;
+
+    if (!move_uploaded_file($tempname, $file_destination)) {
+        error_log("Error" . $sql . "</br> " . mysqli_error($conn));
+        header('Location: /admin/edit.php?=' . $id);
+        die;
     }
 }
 
-
-/*DATABASE*/
 require_once('../connections_database.php');
 
-$sql = "UPDATE products SET ime_proizvoda='{$ime_proizvoda}', cijena='{$cijena}', opis_proizvoda='{$opis_proizvoda}', slika='{$slika}' WHERE id='{$id}'";
+$sql = "UPDATE products SET ime_proizvoda='{$ime_proizvoda}', cijena='{$cijena}', opis_proizvoda='{$opis_proizvoda}',kolicina='{$kolicina}', slika='{$slika}'   WHERE id='{$id}'";
 
 
-//var_dump($sql);
-//die();
 if (mysqli_query($conn, $sql)) {
     error_log("Uspjesno dodat proizvod u bazu");
     header('Location: /admin/index.php');

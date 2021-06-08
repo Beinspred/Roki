@@ -13,7 +13,7 @@ if($_SERVER['REQUEST_METHOD']=="GET"){
 require_once('../connections_database.php');
 
 
-$select = "SELECT id,ime_proizvoda, cijena, opis_proizvoda, slika FROM products WHERE id='{$id}'";
+$select = "SELECT id,ime_proizvoda, cijena, opis_proizvoda, kolicina, slika FROM products WHERE id='{$id}'";
 $rezultat= $conn->query($select);
 $proizvod = [];
 
@@ -65,14 +65,16 @@ Edit proizvoda
 <body>
 <h1>Edit proizvod</h1>
 
-<form action="/admin/update.php?id=<?php echo $proizvod['id']; ?>" method="post">
+<form action="/admin/update.php?id=<?php echo $proizvod['id']; ?>" method="post" enctype="multipart/form-data">
     <input type="text" name="ime_proizvoda" placeholder="Ime proizvoda" value="<?php echo $proizvod['ime_proizvoda']; ?>">
     <input type="number" name="cijena" placeholder="Cijena" value="<?php echo $proizvod['cijena']; ?>">
     <input type="text" name="opis_proizvoda" placeholder="Opis proizvoda" value="<?php echo $proizvod['opis_proizvoda']; ?>">
-    <input type="text" name="slika" placeholder="Slika proizvoda" value="<?php echo $proizvod['slika']; ?>">
+    <input type="text" name="kolicina" placeholder="Kolicina" value="<?php echo $proizvod['kolicina']; ?>">
+    <input type="text" name="korekcija_kolicina" placeholder="Korekcija kolicina">
 
 
-    <button type="submit">Edit</button>
+    <input type="file" name="slika" placeholder="Slika proizvoda" value="<?php echo $proizvod['slika']; ?>">
+    <button type="submit" name="submit">Edit</button>
 </form>
 
 </body>
