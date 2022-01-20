@@ -1,0 +1,7 @@
+
+instanciranje objekta = dodjeljivanje konstruisanog objekta varijabli
+
+instaciranje objekta Controller
+$controllerObject = new $controllerName();
+
+this koristis samo unutar klase i funkcije/metode i this se odnosi na objekat
