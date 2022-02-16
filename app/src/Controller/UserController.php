@@ -1,14 +1,14 @@
 <?php
-require_once __DIR__ . '/../Model/UserModel.php';
-require_once __DIR__. '/Controller.php';
+require_once __DIR__ . '/../../Model/UserModel.php';
+require_once __DIR__. '/../Controller.php';
 
 class UserController extends Controller
 {
     //properti,polje
-    protected $indexViewName = 'users/index';
-    protected $updateViewName = 'users/update';
+    protected $indexViewName = 'user/index';
+    protected $updateViewName = 'user/update';
     protected $updateRedirection = '/user/index';
-    protected $deleteViewName = 'users/delete';
+    protected $deleteViewName = 'user/delete';
     protected $deleteRedirection = '/user/index';
 
 
@@ -22,7 +22,7 @@ class UserController extends Controller
     public function getRegister()
     {
 
-        return $this->render("users/register");
+        return $this->render("user/register");
     }
 
     public function postRegister()
@@ -35,7 +35,7 @@ class UserController extends Controller
 
     }
     public function getLogin(){
-        return $this->render('users/login');
+        return $this->render('user/login');
     }
     public function postLogin(){
             $controllerLogin = $this->model->login($_POST);

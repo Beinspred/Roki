@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . '/../Model/productModel.php';
-require_once __DIR__ . '/../Model/categoryModel.php';
-require_once __DIR__. '/Controller.php';
+require_once __DIR__ . '/../../Model/productModel.php';
+require_once __DIR__ . '/../../Model/categoryModel.php';
+require_once __DIR__. '/../Controller.php';
 
 class ProductController extends Controller
 {
