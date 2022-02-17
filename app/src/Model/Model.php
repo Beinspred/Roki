@@ -6,12 +6,9 @@ abstract class Model
     protected $tableName;
     protected $relevantColumns;
 
-
-
     public function __construct()
     {
         $this->db = new DatabaseAdapter;
-
     }
 
     public function getAll()
@@ -22,7 +19,6 @@ abstract class Model
 
     public function getById($id)
     {
-
         $modelUpdate = $this->db->select($this->tableName, $id);
         return $modelUpdate;
     }
@@ -30,28 +26,20 @@ abstract class Model
     public function create($podaciPOST)
     {
         $filterPost = [];
-
         foreach ($this->relevantColumns as $relevantColumn) {
             $filterPost[$relevantColumn] = $podaciPOST[$relevantColumn];
-
         }
-
-
         $modelCreate = $this->db->insert($this->tableName, $filterPost);
-        
         return $modelCreate;
     }
 
     public function update($podaciPost, $id)
     {
-
         $filterUpdate = [];
         foreach ($this->relevantColumns as $relevantUpdate) {
             $filterUpdate[$relevantUpdate] = $podaciPost[$relevantUpdate];
         }
-
         $modelUpdate = $this->db->update($this->tableName, $id, $filterUpdate);
-
         return $modelUpdate;
     }
 

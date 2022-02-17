@@ -22,10 +22,10 @@ abstract class Controller
                 return;
                 //return sam koristimo kad ne zelimo da nastavimo izvrsavanje dalji tok funkcije
          }
-         if (!array_key_exists('user', $_SESSION)){
-
-             header("Location: /user/login");
-         }
+//         if (!array_key_exists('user', $_SESSION)){
+//
+//             header("Location: /user/login");
+//         }
      }
 
     protected function render($viewName, $data = [])
@@ -49,13 +49,10 @@ abstract class Controller
     public function postCreate(){
         $controllerCreate = $this->model->create($_POST);
         header("Location: $this->createRedirection");
-
         return $controllerCreate;
     }
 
-
-
-    public function getUpdate($id)
+    public function getUpdate(int $id)
     {
         //$data ucitava aktuelne podatke
 

@@ -5,3 +5,11 @@ instaciranje objekta Controller
 $controllerObject = new $controllerName();
 
 this koristis samo unutar klase i funkcije/metode i this se odnosi na objekat
+
+
+Order 1 datum 21.2
+Id stavka, ime prozivoda, kolicina, cijena, ukupno,  rok isporuke
+1          majica         2         2       4          5 radnih dana
+2           jakna           5       2       10         5
+
+                                                            ukupno 14 km

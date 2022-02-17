@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../../Model/UserModel.php';
-require_once __DIR__. '/../Controller.php';
+require_once __DIR__ . '/../Model/UserModel.php';
+require_once __DIR__. '/Controller.php';
 
 class UserController extends Controller
 {
@@ -27,16 +27,15 @@ class UserController extends Controller
 
     public function postRegister()
     {
-
-//       $controllerObject = new $controllerName()--UserController;
         $controllerCreate = $this->model->create($_POST);
         header("Location: /user/login");
         return $controllerCreate;
-
     }
+
     public function getLogin(){
         return $this->render('user/login');
     }
+
     public function postLogin(){
             $controllerLogin = $this->model->login($_POST);
 

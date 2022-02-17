@@ -24,4 +24,12 @@ categoryModel extends Model
 
 
     }
+    public function getBySeo($seo_slug)
+    {
+        $seo = $this->db->queryOne("SELECT * FROM `{$this->tableName}` WHERE seo_slug='{$seo_slug}'");
+        return $seo;
+
+    }
+
+
 }

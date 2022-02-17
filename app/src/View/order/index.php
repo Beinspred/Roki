@@ -35,15 +35,8 @@
     <thead>
     <tr>
         <th>ID</th>
-        <th>Ime</th>
-        <th>Cijena</th>
-        <th>Opis proizvoda</th>
-        <th>Slika proizvoda</th>
-        <th>Kolicina</th>
-        <th>Cijena kostanja</th>
-
-
-        <th>Opcije</th>
+        <th>Datum order</th>
+        <th>Order count</th>
     </tr>
     </thead>
     <tbody>
@@ -53,26 +46,22 @@
 
         ?>
         <tr>
-            <td> <?php echo $order['id']; ?> </td>
-            <td><?php echo $order['ime_proizvoda']; ?> </td>
-            <td><?php echo $order['cijena']; ?> KM</td>
-            <td> <?php echo $order['opis_proizvoda']; ?>  </td>
-            <td><img src="<?php echo $order['slika']; ?>" alt="<?php echo $order['ime_proizvoda']; ?> "></td>
-            <td><?php echo $order['kolicina']; ?></td>
-            <td><?php echo $order['ukupno']; ?> KM</td>
-
-
-            <td>
-
-            </td>
+            <td> <?php echo $order['order_id']; ?> </td>
+            <td><?php echo $order['datum_order']; ?> </td>
+            <td><?php echo $order['counter']; ?> </td>
         </tr>
         <?php
     }
 
 
     ?>
-
-
+    <tr>
+    <td>
+        <a href="/order/list " class="edit">
+            Show more
+        </a>
+    </td>
+    </tr>
     </tbody>
 </table>
 </body>
