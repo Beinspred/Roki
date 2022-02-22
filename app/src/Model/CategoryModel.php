@@ -2,8 +2,7 @@
 require_once __DIR__.'/../DatabaseAdapter.php';
 require_once __DIR__.'/Model.php';
 
-class
-categoryModel extends Model
+class CategoryModel extends Model
 {
     protected $db;
     protected $tableName = 'category';

@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../Model/productModel.php';
-require_once __DIR__ . '/../Model/categoryModel.php';
+require_once __DIR__ . '/../Model/ProductModel.php';
+require_once __DIR__ . '/../Model/CategoryModel.php';
 require_once __DIR__. '/Controller.php';
 
 class ProductController extends Controller
@@ -18,8 +18,8 @@ class ProductController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->model = new productModel();
-        $this->categoryModel = new categoryModel();
+        $this->model = new ProductModel();
+        $this->categoryModel = new CategoryModel();
     }
     public function getCreate()
     {

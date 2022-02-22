@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/Controller.php';
-require_once __DIR__ . '/../Model/categoryModel.php';
+require_once __DIR__ . '/../Model/CategoryModel.php';
 
 
 class CategoryController extends Controller
@@ -18,7 +18,7 @@ class CategoryController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->model = new categoryModel();
+        $this->model = new CategoryModel();
     }
 
     public function getCreate()
