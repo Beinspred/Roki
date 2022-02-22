@@ -12,6 +12,7 @@ class DatabaseAdapter
         $password = $config['password'];
         $database = $config['database'];
         $this->conn = new PDO("mysql:host={$host};dbname={$database}", $user, $password);
+        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
     /**
      * @return PDO
@@ -36,7 +37,7 @@ class DatabaseAdapter
         $values = implode(", ", $values);
         $sql = "INSERT INTO `{$tabelName}` ({$attributes}) VALUES ({$values})";
         if ($this->conn->query($sql)) {
-            return true;
+            return $this->conn->lastInsertId();
         } else {
             return false;
         }

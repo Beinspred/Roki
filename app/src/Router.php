@@ -5,9 +5,20 @@ class Router
 {
     private static $routeMap = [];
 
+    private static function importHelpers()
+    {
+        $files = glob(__DIR__ . '/helpers/*');
+
+        foreach ($files as $file) {
+            include_once $file;
+        }
+    }
+
     public static function run()
     {
         require_once __DIR__ . '/routes.php';
+
+        self::importHelpers();
 
         $httpMethod = $_SERVER['REQUEST_METHOD'];
         $routes = self::$routeMap[$httpMethod];

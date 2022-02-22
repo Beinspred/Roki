@@ -2,7 +2,6 @@
 
 <html>
 <head>
-
     <style>
         h1 {
             text-align: center;
@@ -41,14 +40,12 @@
 </head>
 <body>
 <h1>Novi proizvod</h1>
-
 <form action="/product/create/" method="post">
     <input type="text" name="ime_proizvoda" placeholder="Ime proizvoda">
     <input type="number" name="cijena" placeholder="0.00">
     <input type="text" name="opis_proizvoda" placeholder="Opis_proizvoda">
     <input type="text" name="kolicina" placeholder="Kolicina">
-    <input type="text" name="slika" placeholder="slika">
-
+    <input type="file" name="slika" placeholder="slika" >
     <select name="parent_id" id="parent_id">
         <option value="0">Odaberi Kategoriju</option>
         <?php foreach ($data['category'] as $category) { ?>
@@ -56,11 +53,9 @@
             <?php
         }
         ?>
-
     </select>
-
     <button type="submit">Kreiraj</button>
 </form>
-
 </body>
 </html>
+

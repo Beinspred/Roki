@@ -5,6 +5,30 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
+    a.nav-link {
+        color: #000000;
+        text-decoration: none;
+        background-color: transparent;
+    }
+    .dropdown {<?php  /** @var array $data */ ?>
+
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        padding: 12px 16px;
+        z-index: 1;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
 body {
 
     display: block;
@@ -151,6 +175,68 @@ body {
 </style>
 </head>
 <body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md">
+            <nav class="navbar navbar-expand-sm justify-content-center">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item">
+
+                        <div class="dropdown">
+                            <p>Category</p>
+
+                            <div class="dropdown-content">
+                                <?php
+                                foreach ($data['category'] as $category) {
+                                    ?>
+                                    <ul>
+                                        <li><a href="/cat/<?php echo $category['seo_slug']; ?>" ><?php echo $category['name']; ?></a></li>
+                                    </ul>
+                                    <?php
+                                }
+                                ?>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link">Wommen</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link">Men</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link">Teen</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link">Kids</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-md-1">
+            <a href="#" class="nav-link">ROKI</a>
+
+        </div>
+        <div class="col-md">
+            <nav class="navbar navbar-expand-sm justify-content-center">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Women</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link">Men</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link">Teen</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link">Kids</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
 
 <div class="split left">
   <div class="centered">

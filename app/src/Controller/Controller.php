@@ -39,6 +39,13 @@ abstract class Controller
     public function getIndex()
     {
         $indexAll = $this->model->getAll();
+
+        if ($_SERVER['HTTP_ACCEPT'] === 'application/json') {
+            header('Access-Control-Allow-Origin: *');
+            header('Content-type: application/json');
+            return json_encode($indexAll);
+        }
+
         return $this->render($this->indexViewName, $indexAll);
 
     }

@@ -18,7 +18,7 @@ Router::post('/user/update/{id}', 'UserController', 'postDelete');
 //Product
 Router::get('/product/index', 'ProductController', 'getIndex');
 Router::get('/product/create', 'ProductController', 'getCreate');
-Router::get('/product/create', 'ProductController', 'getCreate');
+Router::post('/product/index', 'ProductController', 'postCreate');
 Router::get('/product/update/{id}', 'ProductController', 'getUpdate');
 Router::post('/product/update/{id}', 'ProductController', 'postUpdate');
 Router::get('/product/delete/{id}', 'ProductController', 'getDelete');
@@ -28,7 +28,7 @@ Router::post('/product/delete/{id}', 'ProductController', 'postDelete');
 Router::get('/order/index', 'OrderController', 'getIndex');
 Router::get('/order/show/{id}', 'OrderController', 'getShow');
 Router::get('/order/create', 'OrderController', 'getCreate');
-Router::get('/product/create', 'OrderController', 'getCreate');
+Router::get('/order/create', 'OrderController', 'getCreate');
 Router::get('/order/create', 'OrderController', 'getCreate');
 Router::get('/order/update/{id}', 'OrderController', 'getUpdate');
 Router::post('/order/update/{id}', 'OrderController', 'postUpdate');
